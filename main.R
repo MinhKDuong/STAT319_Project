@@ -100,6 +100,10 @@ hist(sample_means, main = "Sample Distribution of Sample Mean on Price", xlab = 
 # The histogram shows that the sample distribition of "Price" is symmetric
 
 
+#-----------------------------------------------------------------------------------------------------------#
+
+
+
 # Question 2
 # 1)
 # H_0: sample mean = 50000 ; H_1: sample mean > 50000
@@ -157,11 +161,12 @@ if (p <= alpha) {
 }
 
 
+#---------------------------------------------------------------------------------------------#
 
 
 
 
-
+#---------------------------------------------------------------------------------------------#
 
 
 # Question 4
@@ -294,7 +299,10 @@ plot(anova_model, 1)
 
 # Next step: 
 # Consider that the single factor ANOVA indicate there is no different in mean prices across Brand, Fuel Type, Condition, and Model, we can try to conduct comparison on two or more factor variables each with at least 4 treatment levels.
-# 
+
+
+#--------------------------------------------------------------------------------------------------------#
+
 
 
 
