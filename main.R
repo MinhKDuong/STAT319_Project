@@ -162,9 +162,33 @@ if (p <= alpha) {
 
 
 #---------------------------------------------------------------------------------------------#
-
-
-
+#Question 3
+#1) Plot histogram of bootstrap medians
+B <- 10000
+bootstrap_median <- numeric(B) 
+for(i in 1:B) {
+  num_i <- sample(car_info$Engine.Size, size = length(car_info$Engine.Size), replace = TRUE)
+  bootstrap_median[i] <- median(num_i)
+}
+#This shows the histogram after the bootstrap was applied
+hist(bootstrap_median, main = "Bootstrap of Median Engine Size", xlab = "Bootstrap Median", col = "lightblue", border = "white")
+#2) Use QQ plot to explain which confidence interval is appropriate
+# What can you say about bootstrap distribution based on QQ
+# This will create the Q-Q Plot and make a red line through it showing the 
+qqnorm(bootstrap_median, main = "Q-Q Plot of Bootstrap")
+qqline(bootstrap_median, col = "red")
+#3) Construct appropriate confidence interval based on previous answer
+theta_hat <- median(car_info$Engine.Size)
+# Define the Standard Error
+SE_boot <- sd(bootstrap_median)
+# Define the critcal value
+cv <- qnorm(0.975)
+# Find the lower and upper confidence intervals
+CI_lower <- theta_hat - cv * SE_boot
+CI_upper <- theta_hat + cv * SE_boot
+# Print the confidence intervals
+CI_lower
+CI_upper
 
 #---------------------------------------------------------------------------------------------#
 
