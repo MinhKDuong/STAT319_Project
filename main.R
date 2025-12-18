@@ -326,7 +326,28 @@ plot(anova_model, 1)
 
 
 #--------------------------------------------------------------------------------------------------------#
+# Question 5
+# Factor variable: Fuel type, Transmission
+# Treatement Levels: Brand, fuel type, condition, model
+# Call car_info for any car statistics
 
+#1 Make interaction plots
+# The plot for the mileage with factor variables fuel type and transmission.
+interaction.plot(car_info$Fuel.Type, car_info$Transmission, car_info$Mileage,
+main = "Mileage Interaction Plot", xlab = "Fuel Type",  ylab = "Mean Mileage",
+trace.label = "Transmission")
+
+# The plot for the price with factor variables fuel type and transmission.
+interaction.plot(car_info$Fuel.Type, car_info$Transmission, car_info$Price,
+main = "Price Interaction Plot", xlab = "Fuel Type", ylab = "Mean Price",
+trace.label = "Transmission")
+#2 Which statistical model is being used
+
+#3 Make an ANOVA table
+
+#4 Perform hypothesis test
+
+#5 Multiple comparisons
 
 
 
