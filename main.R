@@ -353,18 +353,49 @@ plot(model, which = 1)
 
 #3 Make an ANOVA table
 # Define what will be used on Mileage and create the table accordingly.
-model <- aov(Mileage ~ Fuel.Type * Transmission, data = car_info)
-anova_table <- anova(model)
+anova_mile <- aov(Mileage ~ Fuel.Type * Transmission, data = car_info)
+anova_table <- anova(anova_mile)
 anova_table
 
 #4 Perform hypothesis test
 # Compare the data to see if it rejects or not
-anova_model <- aov(Mileage ~ Fuel.Type * Transmission, data = car_info)
-summary(anova_model)
+anova_mileage <- aov(Mileage ~ Fuel.Type * Transmission, data = car_info)
+hypo_summary <- summary(anova_mileage)
+
+# Degrees of freedom
+dof <- anova_table["Residuals", "Df"]
+
+# We get the df and crit values for fuel type
+df_fuel <- anova_table["Fuel.Type", "Df"]
+rr_fuel <- qf(1 - alpha, df1 = df_fuel, df2 = dof)
+
+# We get the df and crit values for transmission
+df_trans <- anova_table["Transmission", "Df"]
+rr_trans <- qf(1 - alpha, df1 = df_trans, df2 = dof)
+
+# We take the values of f here
+F_fuel <- anova_table["Fuel.Type", "F value"]
+F_trans <- anova_table["Transmission", "F value"]
+
+# We take the values of f here
+p_fuel <- anova_table["Fuel.Type", "Pr(>F)"]
+p_trans <- anova_table["Transmission", "Pr(>F)"]
+# Define the f-statistic, p-value and rejection region for fuel type
+sprintf("The test statistic for Fuel Type is %.4f", F_fuel)
+sprintf("The p-value for Fuel Type is %.4f", p_fuel)
+sprintf("The rejection region for Fuel Type is %.4f", rr_fuel)
+reject_fuel <- F_fuel > rr_fuel
+reject_fuel
+# Define the f-statistic, p-value and rejection region for transmission
+sprintf("The test statistic for Transmission  is %.4f", F_trans)
+sprintf("The p-value for Transmission is %.4f", p_trans)
+sprintf("The rejection region for Transmission is %.4f", rr_trans)
+reject_trans <- F_trans > rr_trans
+reject_trans
 
 #5 Multiple comparisons
 # Use Tukey to find the multiple comparisons
-tukey_fuel <- TukeyHSD(anova_model, "Fuel Type")
+tukey_fuel <- TukeyHSD(anova_model, "Fuel.Type")
 tukey_fuel
 
 
