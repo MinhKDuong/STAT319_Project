@@ -398,5 +398,6 @@ reject_trans
 tukey_fuel <- TukeyHSD(anova_model, "Fuel.Type")
 tukey_fuel
 
-
+tukey_trans <- TukeyHSD(anova_mileage, "Transmission")
+tukey_trans
 
