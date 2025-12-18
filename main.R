@@ -341,14 +341,31 @@ trace.label = "Transmission")
 interaction.plot(car_info$Fuel.Type, car_info$Transmission, car_info$Price,
 main = "Price Interaction Plot", xlab = "Fuel Type", ylab = "Mean Price",
 trace.label = "Transmission")
-#2 Which statistical model is being used
+
+#2 Q-Q Plots
+# Define what parts of the dataset we are using
+model <- aov(Mileage ~ Fuel.Type * Transmission, data = car_info)
+# Create the qq plot and the reference line
+qqnorm(residuals(model))
+qqline(residuals(model), col = "red")
+# Create the residual plot
+plot(model, which = 1)
 
 #3 Make an ANOVA table
+# Define what will be used on Mileage and create the table accordingly.
+model <- aov(Mileage ~ Fuel.Type * Transmission, data = car_info)
+anova_table <- anova(model)
+anova_table
 
 #4 Perform hypothesis test
+# Compare the data to see if it rejects or not
+anova_model <- aov(Mileage ~ Fuel.Type * Transmission, data = car_info)
+summary(anova_model)
 
 #5 Multiple comparisons
-
+# Use Tukey to find the multiple comparisons
+tukey_fuel <- TukeyHSD(anova_model, "Fuel Type")
+tukey_fuel
 
 
 
